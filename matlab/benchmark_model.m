@@ -5,13 +5,10 @@ function [estimatePower] = benchmark_model(windspeed, theta, cutoutWindspeed, sa
 %   theta: i pratametri del tratto cubico.
 %   cutoutWindspeed: la velocità oltre la quale si ha saturazione
 %   saturationValue: il valore della saturazione
-
-    cutout = cutoutWindspeed;
-    saturation = saturationValue;
-
-    out = ones(length(windspeed), 1);
-    out(windspeed > cutout) = saturation;
-    out(windspeed <= cutout) = (windspeed(windspeed <= cutout)).^3 * theta;
+    
+    out = zeros(length(windspeed), 1);
+    out(windspeed > cutoutWindspeed) = saturationValue;
+    out(windspeed <= cutoutWindspeed) = (windspeed(windspeed <= cutoutWindspeed)).^3 * theta;
 
     estimatePower = out;
 end
