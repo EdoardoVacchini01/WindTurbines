@@ -1,10 +1,4 @@
 classdef kNNeighborsRegressor
-%k-Nearest Neighbors Regressor
-%
-% Author: M.Sc. David Ferreira - Federal University of Amazonas 
-% Contact: ferreirad08@gmail.com
-% Date: September 2020
-
 properties
     k = 5 % Number of neighbors
     metric = 'euclidean' % Distance metric

@@ -8,13 +8,18 @@ function [estimatePower,windspeed] = KNearestNeighbors(trainingPower, trainingWi
 %   radius: il valore del raggio in cui prendere i vicini
 
 outp = [];
-outw = [];
 for i = 0 : radius/2 : upperboundWS
     datainrange = trainingPower(trainingWindspeed >= i - radius & trainingWindspeed < i + radius);
-    outp = [outp; mean(datainrange)];
-    outw = [outw; i];
+    
+    if isempty(datainrange) && (i == 0 || i == radius/2)
+        outp = [outp; 0];
+    elseif isempty(datainrange)
+        outp = [outp; outp(floor(i/(radius/2)) - 1)];
+    else
+        outp = [outp; mean(datainrange)];
+    end
 end
 estimatePower = outp;
-windspeed = outw;
+windspeed = [0 : radius/2 : upperboundWS]';
 end
 
